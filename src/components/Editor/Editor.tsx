@@ -6,8 +6,10 @@ import {
   CommandHighlighter,
   HashtagHighlighter,
   MentionHighlighter,
+  MentionSuggestion,
   UrlHighlighter,
 } from "../../extensions";
+import { HashtagSuggestion } from "../HashtagSuggestion";
 
 export const Editor = () => {
   const editor = useEditor({
@@ -19,10 +21,16 @@ export const Editor = () => {
       HashtagHighlighter,
       CommandHighlighter,
       UrlHighlighter,
+      MentionSuggestion,
     ],
     content:
-      "<p>Hello @world, #hello and /run! Check https://tiptap.dev for more.</p>",
+      "<p>Type @ or # to pick something. Hello @world, #hello and /run! Check https://tiptap.dev for more.</p>",
   });
 
-  return <EditorContent editor={editor} />;
+  return (
+    <>
+      <EditorContent editor={editor} />
+      <HashtagSuggestion editor={editor} />
+    </>
+  );
 };
